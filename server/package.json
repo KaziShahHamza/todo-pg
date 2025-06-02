@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "build": "echo 'No build step needed for backend'",
+    "build": "echo \"No build step needed for backend\"",
     "start": "node index.js"
   },
   "dependencies": {
