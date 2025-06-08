@@ -14,7 +14,7 @@ const targetDb = "tododb";
 const initPool = new Pool({
   connectionString: process.env.PG_URI.replace(targetDb, "postgres"),
   ssl: {
-    rejectUnauthorized: false, 
+    rejectUnauthorized: false,
   },
 });
 
@@ -76,12 +76,18 @@ async function startServer() {
 
     await createTodosTable(pool);
 
-    app.use(cors());
+    app.use(
+      cors({
+        origin: "*", // or your frontend URL
+        methods: ["GET", "POST", "PUT", "DELETE"],
+      })
+    );
     app.use(express.json());
 
     // Routes
     app.get("/todos", async (req, res) => {
       try {
+        console.log("Entered fetching todos");
         const result = await pool.query("SELECT * FROM todos ORDER BY id");
         res.json(result.rows);
       } catch (err) {
@@ -116,7 +122,7 @@ async function startServer() {
     });
 
     app.listen(port, () => {
-      console.log(`🚀 Server running on http://localhost:${port}`);
+      console.log(`🚀 Server running on port: ${port}`);
     });
   } catch (err) {
     console.error("❌ Server failed to start:", err);
