@@ -13,11 +13,20 @@ const targetDb = "tododb";
 // Step 1: Connect to default "postgres" DB
 const initPool = new Pool({
   connectionString: process.env.PG_URI.replace(targetDb, "postgres"),
+  ssl: {
+    rejectUnauthorized: false, 
+  },
 });
 
 // Create the database if it doesn't exist
 async function createDatabase() {
   try {
+    console.log("Original PG_URI:", process.env.PG_URI);
+    console.log(
+      "Modified URI:",
+      process.env.PG_URI.replace(targetDb, "postgres")
+    );
+
     const result = await initPool.query(
       `SELECT 1 FROM pg_database WHERE datname = $1`,
       [targetDb]
@@ -35,7 +44,7 @@ async function createDatabase() {
     console.error("❌ Failed to create database:", err);
     throw err;
   }
-}   
+}
 
 // Create the todos table if it doesn't exist
 async function createTodosTable(pool) {
@@ -58,7 +67,12 @@ async function startServer() {
   try {
     await createDatabase();
 
-    const pool = new Pool({ connectionString: process.env.PG_URI });
+    const pool = new Pool({
+      connectionString: process.env.PG_URI,
+      ssl: {
+        rejectUnauthorized: false, // Allow self-signed certs (Render default)
+      },
+    });
 
     await createTodosTable(pool);
 
