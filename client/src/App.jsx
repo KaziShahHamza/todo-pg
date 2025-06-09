@@ -30,13 +30,13 @@ function App() {
 
   return (
     <div className="max-w-md mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">TODO List</h1>
+      <h1 className="text-3xl font-bold mb-4">TODO-List</h1>
       <div className="flex items-center mb-4">
         <input
           className="flex-1 px-4 py-2 border rounded-md focus:outline-none"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="New todo "
+          placeholder="New todo"
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md ml-2 cursor-pointer"

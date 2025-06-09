@@ -1,0 +1,20 @@
+steps:
+  - name: "gcr.io/cloud-builders/npm"
+    dir: "server"
+    args: ["install"]
+
+  - name: "gcr.io/cloud-builders/npm"
+    dir: "server"
+    args: ["run", "build"] # optional
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - run
+      - deploy
+      - server-service # Name of your Cloud Run service
+      - --source=server
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
+      - --add-cloudsql-instances=extreme-signal-462408-r6:us-central1:todo-db
+      - --set-env-vars=DB_URL=postgres://postgres:helodoly@/todos?host=/cloudsql/extreme-signal-462408-r6:us-central1:todo-db

@@ -1,0 +1,18 @@
+steps:
+  - name: 'gcr.io/cloud-builders/npm'
+    dir: 'client'
+    args: ['install']
+
+  - name: 'gcr.io/cloud-builders/npm'
+    dir: 'client'
+    args: ['run', 'build']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - run
+      - deploy
+      - client-service  # Name of your frontend Cloud Run service
+      - --source=client
+      - --region=us-central1
+      - --platform=managed
+      - --allow-unauthenticated
