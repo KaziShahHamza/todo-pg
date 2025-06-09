@@ -36,7 +36,7 @@ function App() {
           className="flex-1 px-4 py-2 border rounded-md focus:outline-none"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="New todo"
+          placeholder="New todo "
         />
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md ml-2 cursor-pointer"
