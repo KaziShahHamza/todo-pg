@@ -12,7 +12,7 @@ const targetDb = "tododb";
 
 // Step 1: Connect to default "postgres" DB
 const initPool = new Pool({
-  connectionString: process.env.PG_URI.replace(targetDb, "postgres"),
+  connectionString: process.env.PG_URI.replace(targetDb , "postgres"),
   ssl: {
     rejectUnauthorized: false,
   },
