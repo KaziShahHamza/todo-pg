@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="max-w-md mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">TODO-List</h1>
+      <h1 className="text-3xl font-bold mb-4">TODO - List</h1>
       <div className="flex items-center mb-4">
         <input
           className="flex-1 px-4 py-2 border rounded-md focus:outline-none"
